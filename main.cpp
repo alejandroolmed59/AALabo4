@@ -55,20 +55,36 @@ void quickSort(int arr[], int low, int high)
     if(arr[high]%2!=0) arr[high]-=1;
 }  
 
-
-int main()  
-{  
-    int arr[] = {1,3,6,7};  
-    int n = sizeof(arr) / sizeof(arr[0]);  
-    quickSort(arr, 0, n - 1);  
-    printArray(arr, n);  
+int format(int arr[], int size){
     int ant=0;
-    for(int i=0; i<n;i++){
+    int contadorPares=0;
+    for(int i=0; i<size;i++){
       if(arr[i]-ant>2){
         arr[i]=arr[i]-2;
       }
       ant=arr[i];
+    }  
+    printArray(arr,size);
+    int flag=true;
+    ant=0;
+    for(int i=0; i<size; i++){
+      if(ant==arr[i]) flag=false;
+      else flag=true;
+      
+      if(contadorPares!=arr[i] && flag){
+        return contadorPares;
+      }
+      contadorPares+=2;
+      ant=arr[i];
     }
-    printArray(arr, n);
+    return contadorPares;
+}
+
+int main()  
+{  
+    int arr[] = {1,3,3,3,6,7};  
+    int n = sizeof(arr) / sizeof(arr[0]);  
+    quickSort(arr, 0, n - 1);  
+    cout<<format(arr, n);
     return 0;  
 }  
