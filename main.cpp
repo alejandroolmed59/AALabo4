@@ -28,13 +28,17 @@ int partition (int arr[], int low, int high)
   
     for (int j = low+1; j <= high; j++)  
     {   
+        if(arr[j]%2 !=0){
+          arr[j]= arr[j]-1;
+        }
         if (arr[j] < pivot)  
         {  
             i++;
             swap(&arr[i], &arr[j]);  
         }  
     }  
-    swap(&arr[i], &arr[low]);  
+    
+    swap(&arr[i], &arr[low]);
     return i;  
 }  
   
@@ -52,7 +56,7 @@ void quickSort(int arr[], int low, int high)
 
 int main()  
 {  
-    int arr[] = {4,3,8,2,7};  
+    int arr[] = {6,1,8,5};  
     int n = sizeof(arr) / sizeof(arr[0]);  
     quickSort(arr, 0, n - 1);  
     printArray(arr, n);  
