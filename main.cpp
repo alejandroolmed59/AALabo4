@@ -58,15 +58,16 @@ void quickSort(int arr[], int low, int high)
 int format(int arr[], int size){
     int ant=0;
     int contadorPares=0;
+    int og= arr[size-1];
     for(int i=0; i<size;i++){
       if(arr[i]-ant>2){
         arr[i]=arr[i]-2;
       }
       ant=arr[i];
     }  
-    printArray(arr,size);
+    //printArray(arr,size);
     int flag=true;
-    ant=0;
+    ant=-INFINITY;
     for(int i=0; i<size; i++){
       if(ant==arr[i]) flag=false;
       else flag=true;
@@ -74,17 +75,32 @@ int format(int arr[], int size){
       if(contadorPares!=arr[i] && flag){
         return contadorPares;
       }
-      contadorPares+=2;
+      if(flag) contadorPares+=2;   
       ant=arr[i];
     }
+    if(contadorPares==og) return contadorPares+2;
     return contadorPares;
 }
 
 int main()  
 {  
-    int arr[] = {1,3,3,3,6,7};  
-    int n = sizeof(arr) / sizeof(arr[0]);  
-    quickSort(arr, 0, n - 1);  
-    cout<<format(arr, n);
+    //int arr[] = {1,3,5,6,8,9,12,14,16};  
+    //int n = sizeof(arr) / sizeof(arr[0]);  
+    //quickSort(arr, 0, n - 1);  
+    //cout<<format(arr, n);
+    int T, n, A=0;
+    cin>>T;
+    while(T>0){
+      cin>>n;
+      int arr[n];
+      for(int k=0; k<n; k++){
+        cin>>A;
+        arr[k]=A;
+      }
+      quickSort(arr, 0, n-1);
+      cout<<format(arr, n)<<endl;
+      T--;
+    }
+
     return 0;  
 }  
